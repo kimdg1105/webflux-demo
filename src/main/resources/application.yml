@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org:
+      example:
+        webfluxdemo: debug
+      springframework:
+        data: trace
+
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
