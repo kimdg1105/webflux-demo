@@ -1,28 +1,29 @@
 package org.example.webfluxdemo.data;
 
+import lombok.extern.slf4j.Slf4j;
+import org.example.webfluxdemo.domain.Image;
+import org.example.webfluxdemo.model.ImageCreateModel;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.FileSystemUtils;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static org.example.webfluxdemo.constants.StringConstants.BASE_IMAGE_PATH;
-
-@Configuration
+@Slf4j
+@Component
 public class DataConfig {
+
+
     @Bean
-    CommandLineRunner setUp() {
+    CommandLineRunner setUp(MongoOperations operations) {
         return args -> {
-            FileSystemUtils.deleteRecursively(new File(BASE_IMAGE_PATH));
-            Files.createDirectory((Paths.get(BASE_IMAGE_PATH)));
-            FileCopyUtils.copy("Test file1", new FileWriter(BASE_IMAGE_PATH + "/test1.jpg"));
-            FileCopyUtils.copy("Test file2", new FileWriter(BASE_IMAGE_PATH + "/test2.jpg"));
-            FileCopyUtils.copy("Test file3", new FileWriter(BASE_IMAGE_PATH + "/test3.jpg"));
+            operations.insert(Image.of((new ImageCreateModel("test1.jpg", "/images/test1.jpg"))));
+            operations.insert(Image.of((new ImageCreateModel("test2.jpg", "/images/test2.jpg"))));
+            operations.insert(Image.of((new ImageCreateModel("test3.jpg", "/images/test3.jpg"))));
+            operations.insert(Image.of((new ImageCreateModel("test4.jpg", "/images/test4.jpg"))));
+
+            operations.findAll(Image.class).forEach(image -> {
+                log.info("Image: {}", image.toString());
+            });
         };
     }
 }

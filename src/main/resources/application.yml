@@ -14,3 +14,6 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+  data:
+    mongodb:
+      uri: mongodb://root:secret@localhost:27017/webflux-demo
