@@ -48,7 +48,7 @@ public class ImageController {
 
     @GetMapping("/")
     public Mono<String> index(Model model) {
-        model.addAttribute("images", imageService.getAllImages());
+        model.addAttribute("images", imageService.getAll());
         return Mono.just("index");
     }
 

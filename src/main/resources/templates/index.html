@@ -17,12 +17,12 @@
     </form>
     <table th:each="image : ${images}">
         <tr>
-            <th>ID</th>
             <td id="imageTd" rowspan="2">
                 <a th:href="@{'/images/view/' + ${image.name}}">
                     <img th:src="@{'/images/view/'+${image.name}}" class="thumbnail" />
                 </a>
             </td>
+            <th>ID</th>
             <td id="imageInfoTd" th:text="${image.id}" /></td>
             <td rowspan="2">
                 <form th:method="delete" th:action="@{'/images/delete/' + ${image.name}}">
