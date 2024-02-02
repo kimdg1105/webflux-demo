@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'java-library'
     id 'org.springframework.boot' version '3.2.2'
     id 'io.spring.dependency-management' version '1.1.4'
 }
@@ -25,12 +26,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    // Lombok
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
 
@@ -41,10 +36,50 @@ dependencies {
     // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.16.1'
+
+
     // UI
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    // Swagger
+    api 'org.springdoc:springdoc-openapi-ui:1.6.14'
+
+    // Spring REST Docs
+    api 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    api 'com.github.javafaker:javafaker:0.12'
+
+    // Apache Commons
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+    developmentOnly('org.springframework.boot:spring-boot-devtools')
+
+    compileOnly 'org.mapstruct:mapstruct:1.5.3.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
+    // JWT
+    api group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+    api group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    api group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 }
+
 
 tasks.named('test') {
     useJUnitPlatform()
