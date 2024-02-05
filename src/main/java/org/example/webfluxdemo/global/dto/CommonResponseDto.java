@@ -88,6 +88,22 @@ public class CommonResponseDto<T> {
         return getAcceptedResponseEntity(responseDto);
     }
 
+    public static <T> ResponseEntity<CommonResponseDto<T>> forbidden() {
+        CommonResponseDto<T> response = CommonResponseDto.<T>builder()
+                .code(CustomExceptionType.USER_FORBIDDEN.name())
+                .message(CustomExceptionType.USER_FORBIDDEN.getMessage())
+                .build();
+        return getForbiddenResponseEntity(response);
+    }
+
+    public static <T> ResponseEntity<CommonResponseDto<T>> forbidden(CustomExceptionAble customExceptionAble) {
+        CommonResponseDto<T> response = CommonResponseDto.<T>builder()
+                .code(customExceptionAble.getName())
+                .message(customExceptionAble.getMessage())
+                .build();
+        return getForbiddenResponseEntity(response);
+    }
+
     public static <T> ResponseEntity<CommonResponseDto<T>> badRequest(String message) {
         CommonResponseDto<T> response = CommonResponseDto.<T>builder()
                 .code(CustomExceptionType.PARAMETER_INVALID.name())
