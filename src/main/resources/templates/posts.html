@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Reactive Programming with Spring Boot</title>
+    <link href="/main.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>게시글</h1>
+<div id="boardDiv">
+    <!--/*@thymesVar id="requestDto" type="org.example.webfluxdemo.dto.PostCreateDto"*/-->
+    <form action="/posts" enctype="text/plain" id="uploadForm" method="post" th:object="${requestDto}">
+        <table>
+            <tbody>
+            <input name="title"
+                   placeholder="제목"
+                   th:field="*{title}"
+                   type="text"/>
+            <input name="content"
+                   placeholder="내용"
+                   style="width:200px;"
+                   th:field="*{content}" type="text"/>
+            <input name="createdBy"
+                   placeholder="작성자"
+                   th:field="*{createdBy}"
+                   type="text"/>
+            <input type="submit" value="등록"/>
+            </tbody>
+        </table>
+    </form>
+</div>
+<table th:each="post : ${posts}">
+    <tr>
+        <th>ID</th>
+        <td th:text="${post.id}"></td>
+        <td rowspan="2">
+            <form th:action="@{'/posts/delete/' + ${post.id}}" th:method="delete">
+                <input type="submit" value="삭제"/>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <th>제목</th>
+        <td th:text="${post.title}"></td>
+    </tr>
+    <tr>
+        <th>내용</th>
+        <td th:text="${post.content}"></td>
+    </tr>
+    <tr>
+        <th>작성자</th>
+        <td th:text="${post.createdBy}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -12,6 +12,7 @@ import java.util.UUID;
 @Document
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @ToString
 public class Image {
     @Id

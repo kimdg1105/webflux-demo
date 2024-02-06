@@ -17,6 +17,8 @@ entity "post" as post {
   * title: string - 제목
   * content: string - 내용
   * created_at: date - 생성일
+  * created_by: string - 작성자
+  * is_deleted: boolean - 삭제여부
 }
 
 @enduml

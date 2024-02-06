@@ -8,11 +8,14 @@
 <body>
 
 <h1>Reactive Programming with Spring Boot</h1>
+<div>
+    <a href="/posts"> > 게시글</a>
+</div>
 <div id="boardDiv">
     <form id="uploadForm" method="post" enctype="multipart/form-data" action="/images">
         <p>
             <input type="file" name="file"/>
-            <input type="submit" value="Upload" />
+            <input type="submit" value="업로드" />
         </p>
     </form>
     <table th:each="image : ${images}">
