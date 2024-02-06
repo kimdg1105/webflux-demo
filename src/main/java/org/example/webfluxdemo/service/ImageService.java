@@ -65,7 +65,7 @@ public class ImageService {
                 throw new RuntimeException(e);
             }
         });
-        
+
         return Mono.when(deleteEntityMono, deletFileMono).then();
     }
 

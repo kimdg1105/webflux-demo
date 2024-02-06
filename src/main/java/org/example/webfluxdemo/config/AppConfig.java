@@ -7,7 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 
 @Slf4j
@@ -21,7 +20,7 @@ public class AppConfig {
     @Bean
     CommandLineRunner setUp(MongoOperations operations) {
         return args -> {
-            operations.findAllAndRemove(new Query(), Image.class);
+            operations.dropCollection(Image.class);
 
             operations.insert(Image.of((new ImageCreateModel("1.jpeg", "/images/1.jpeg"))));
             operations.insert(Image.of((new ImageCreateModel("2.jpeg", "/images/2.jpeg"))));
