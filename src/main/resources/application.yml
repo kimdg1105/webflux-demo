@@ -3,11 +3,8 @@ server:
 
 logging:
   level:
-    org:
-      example:
-        webfluxdemo: debug
-      springframework:
-        data: trace
+    org.org.example: debug
+    org.springframework.data.mongodb: debug
 
 
 spring:
