@@ -19,12 +19,13 @@ public class PostController {
 
     @GetMapping
     public Mono<String> index(Model model) {
+        model.addAttribute("requestDto", new PostCreateDto());
         model.addAttribute("posts", postService.getAll());
         return Mono.just("posts");
     }
 
     @PostMapping
-    public Mono<String> create(@ModelAttribute("post") PostCreateDto requestDto) {
+    public Mono<String> create(@ModelAttribute PostCreateDto requestDto) {
         return postService.create(requestDto)
                 .then(Mono.just("redirect:/posts"));
     }
